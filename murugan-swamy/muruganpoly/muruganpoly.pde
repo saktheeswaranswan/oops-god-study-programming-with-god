@@ -27,8 +27,8 @@ public class MuruganDivinityVisualizer extends PApplet {
 
     muruganImg = loadImage("murugan.jpg");
 
-    String[] names = {"Thiruchendur", "Palani", "Swamimalai", "Thiruthani", "Pazhamudircholai", "Thirupparankundram"};
-    String[] imgs  = {"1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"};
+    String[] names = {"Thiruchendur","Palani","Swamimalai","Thiruthani","Pazhamudircholai","Thirupparankundram"};
+    String[] imgs  = {"1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"};
     String[] causes = {
       "To defeat the demon Surapadman",
       "To teach renunciation and wisdom",
@@ -42,7 +42,7 @@ public class MuruganDivinityVisualizer extends PApplet {
     float y = mainY + 310;
 
     for (int i = 0; i < names.length; i++) {
-      float x = startX + i * (avatarW + gap);
+      float x = startX + i*(avatarW + gap);
       forms.add(new SupremeDivinity(this, names[i], imgs[i], x, y, causes[i]));
     }
   }
@@ -52,7 +52,7 @@ public class MuruganDivinityVisualizer extends PApplet {
     drawMainCBlock(mainX, mainY, mainW, mainH);
 
     image(activeForm != null ? activeForm.img : muruganImg,
-          mainX + mainW / 2, mainY + 120, 260, 260);
+          mainX + mainW/2, mainY + 120, 260, 260);
 
     fill(30);
     textSize(24);
@@ -96,53 +96,5 @@ public class MuruganDivinityVisualizer extends PApplet {
     arc(x - 10, y + 80, 60, 60, PI / 2, 3 * PI / 2);
     line(x - 10, y + 80, x - 10, y + h - 80);
     arc(x - 10, y + h - 80, 60, 60, 3 * PI / 2, PI / 2);
-  }
-}
-
-class SupremeDivinity {
-  String name, cause;
-  PImage img;
-  float x, y;
-  float w = 120, h = 120;
-  PApplet parent;
-
-  SupremeDivinity(PApplet p, String n, String imgP, float x, float y, String c) {
-    parent = p;
-    name = n;
-    cause = c;
-    this.x = x;
-    this.y = y;
-    img = parent.loadImage(imgP);
-  }
-
-  void displayAvatar() {
-    parent.fill(180, 220, 255);
-    parent.stroke(60, 100, 160);
-    parent.strokeWeight(2);
-    parent.rect(x, y, w, h, 12);
-
-    parent.noStroke();
-    parent.fill(120, 180, 220);
-    parent.beginShape();
-    parent.vertex(x, y + 25);
-    parent.vertex(x + 25, y);
-    parent.vertex(x + w, y);
-    parent.vertex(x + w, y + h);
-    parent.vertex(x, y + h);
-    parent.endShape(PApplet.CLOSE);
-
-    parent.image(img, x + w / 2, y + h / 2 - 10, w - 40, h - 40);
-    parent.fill(30);
-    parent.textSize(12);
-    parent.textAlign(PApplet.CENTER, PApplet.TOP);
-    parent.text(name, x + w / 2, y + h - 22);
-  }
-
-  boolean isOver(float mx, float my) {
-    return mx > x && mx < x + w && my > y && my < y + h;
-  }
-
-  String revealCause() {
-    return "As Murugan’s avatar \"" + name + "\": " + cause;
   }
 }
